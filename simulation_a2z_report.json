@@ -1,0 +1,100 @@
+{
+  "steps": [
+    {
+      "timestamp": "2025-07-07T09:26:44.768800",
+      "description": "Create application",
+      "result": true,
+      "data": {
+        "name": "A2Z Test App",
+        "domain": "a2ztest.example.com",
+        "callback_url": "https://a2ztest.example.com/webhook",
+        "id": "b158207f-6513-4c14-9e49-f109983dfbf0",
+        "api_key": "746b225f5560487fb2020579b6326f22",
+        "created_at": "2025-07-07T09:26:44.753915",
+        "is_active": true
+      }
+    },
+    {
+      "timestamp": "2025-07-07T09:26:44.795949",
+      "description": "Create queue",
+      "result": true,
+      "data": {
+        "application_id": "b158207f-6513-4c14-9e49-f109983dfbf0",
+        "name": "A2Z Test Queue",
+        "max_users_per_minute": 5,
+        "priority": 1,
+        "id": "492b5d6a-3003-4ddd-ab2e-39d29ba62b26",
+        "created_at": "2025-07-07T09:26:44.782439",
+        "is_active": true
+      }
+    },
+    {
+      "timestamp": "2025-07-07T09:26:44.824908",
+      "description": "User joins queue",
+      "result": true,
+      "data": {
+        "queue_id": "492b5d6a-3003-4ddd-ab2e-39d29ba62b26",
+        "visitor_id": "a2z_visitor_1",
+        "status": "waiting",
+        "redirect_url": null,
+        "wait_time": null,
+        "expires_at": "2025-07-07T09:36:44.810819",
+        "id": "9421687c-af11-46d3-b782-8d6b5f18a261",
+        "token": "3ea2d875ab7d4527abf4f8701963e992",
+        "created_at": "2025-07-07T09:26:44.811325"
+      }
+    },
+    {
+      "timestamp": "2025-07-07T09:26:44.852402",
+      "description": "Check user status (waiting)",
+      "result": true,
+      "data": {
+        "queue_id": "492b5d6a-3003-4ddd-ab2e-39d29ba62b26",
+        "visitor_id": "a2z_visitor_1",
+        "status": "waiting",
+        "redirect_url": null,
+        "wait_time": null,
+        "expires_at": "2025-07-07T09:36:44.810819",
+        "id": "9421687c-af11-46d3-b782-8d6b5f18a261",
+        "token": "3ea2d875ab7d4527abf4f8701963e992",
+        "created_at": "2025-07-07T09:26:44.811325"
+      }
+    },
+    {
+      "timestamp": "2025-07-07T09:26:44.852649",
+      "description": "Simulate processing (waiting -> ready)",
+      "result": true,
+      "data": {
+        "note": "Would be handled by worker in real system"
+      }
+    },
+    {
+      "timestamp": "2025-07-07T09:26:44.852886",
+      "description": "Simulate expiration (waiting -> expired)",
+      "result": true,
+      "data": {
+        "note": "Would be handled by worker in real system"
+      }
+    },
+    {
+      "timestamp": "2025-07-07T09:26:44.879703",
+      "description": "Cancel user's queue position",
+      "result": true,
+      "data": null
+    },
+    {
+      "timestamp": "2025-07-07T09:26:44.905240",
+      "description": "Delete queue",
+      "result": true,
+      "data": null
+    },
+    {
+      "timestamp": "2025-07-07T09:26:44.923276",
+      "description": "Delete application",
+      "result": true,
+      "data": null
+    }
+  ],
+  "success": true,
+  "errors": []
+}

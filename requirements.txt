@@ -1,0 +1,40 @@
+# Core dependencies
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+python-dotenv
+psycopg2-binary
+
+# Monitoring
+prometheus_fastapi_instrumentator
+
+# Admin & Auth
+fastapi-admin
+jinja2
+python-multipart
+passlib[bcrypt]
+email-validator
+python-jose[cryptography]
+PyJWT
+python-slugify
+
+# HTTP
+httpx
+requests
+
+# Migrations
+alembic
+
+# Testing
+pytest
+pytest-asyncio
+pytest-cov
+
+# Development tools (optional, recommended for local dev)
+black
+flake8
+mypy
+pre-commit 
+redis>=4.2.0 
+aioredis==1.3.1 
