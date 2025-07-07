@@ -99,7 +99,7 @@ class QueueAdmin(ModelView, model=Queue):
     column_list = [Queue.id, Queue.name, Queue.max_users_per_minute]
 
 class QueueUserAdmin(ModelView, model=QueueUser):
-    column_list = [QueueUser.id, QueueUser.visitor_id, QueueUser.status, QueueUser.wait_time, QueueUser.expires_at]
+    column_list = [QueueUser.id, QueueUser.visitor_id, QueueUser.status, QueueUser.IsPassQueue, QueueUser.wait_time, QueueUser.expires_at]
 
 class LogAdmin(ModelView, model=Log):
     column_list = [Log.id, Log.message]

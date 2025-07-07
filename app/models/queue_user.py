@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, ForeignKey, DateTime, Enum, Integer
+from sqlalchemy import Column, String, ForeignKey, DateTime, Enum, Integer, Boolean
 from sqlalchemy.dialects.postgresql import UUID
 from .base import Base
 import enum
@@ -20,4 +20,5 @@ class QueueUser(Base):
     token = Column(String(64), unique=True, nullable=False, default=lambda: uuid.uuid4().hex)
     redirect_url = Column(String(255), nullable=True)
     wait_time = Column(Integer, nullable=True)
+    is_pass_queue = Column(Boolean, default=False, nullable=False)
     expires_at = Column(DateTime, nullable=True) 
