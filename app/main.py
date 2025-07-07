@@ -5,9 +5,11 @@ from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from prometheus_fastapi_instrumentator import Instrumentator
 from dotenv import load_dotenv
-from fastapi_admin.app import app as admin_app
-from fastapi_admin.providers.login import UsernamePasswordProvider
-from fastapi_admin.models import AbstractAdmin
+from sqladmin import Admin, ModelView
+from app.models.application import Application
+from app.models.queue import Queue
+from app.models.queue_user import QueueUser
+from app.models.log import Log
 from sqlalchemy import Column, String
 from app.services.database import engine
 
@@ -78,30 +80,52 @@ app.include_router(dashboard_router)
 app.include_router(scripts_router)
 
 # Define a simple admin user model if not present
-class AdminUser(AbstractAdmin):
+from app.models.base import Base
+class AdminUser(Base):
     __tablename__ = 'admin_users'
     username = Column(String(32), unique=True, nullable=False)
     password = Column(String(128), nullable=False)
 
 # Create the admin user table if it doesn't exist
-from app.models.base import Base
 Base.metadata.create_all(bind=engine)
+
+# Setup SQLAdmin
+admin = Admin(app, engine)
+
+class ApplicationAdmin(ModelView, model=Application):
+    column_list = [Application.id, Application.name, Application.domain, Application.callback_url]
+
+class QueueAdmin(ModelView, model=Queue):
+    column_list = [Queue.id, Queue.name, Queue.max_users_per_minute]
+
+class QueueUserAdmin(ModelView, model=QueueUser):
+    column_list = [QueueUser.id, QueueUser.visitor_id, QueueUser.status, QueueUser.wait_time, QueueUser.expires_at]
+
+class LogAdmin(ModelView, model=Log):
+    column_list = [Log.id, Log.message]
+
+admin.add_view(ApplicationAdmin)
+admin.add_view(QueueAdmin)
+admin.add_view(QueueUserAdmin)
+admin.add_view(LogAdmin)
 
 @app.on_event("startup")
 async def startup():
-    await admin_app.configure(
-        logo_url="https://fastapi-admin.github.io/img/logo.png",
-        template_folders=[],
-        providers=[
-            UsernamePasswordProvider(
-                admin_model=AdminUser,
-                login_logo_url="https://fastapi-admin.github.io/img/logo.png"
-            )
-        ],
-    )
+    # The following lines are no longer needed as fastapi-admin is removed
+    # await admin_app.configure(
+    #     logo_url="https://fastapi-admin.github.io/img/logo.png",
+    #     template_folders=[],
+    #     providers=[
+    #         UsernamePasswordProvider(
+    #             admin_model=AdminUser,
+    #             login_logo_url="https://fastapi-admin.github.io/img/logo.png"
+    #         )
+    #     ],
+    # )
+    pass # Placeholder for future admin setup if needed
 
 # Mount the admin app
-app.mount("/admin", admin_app)
+# app.mount("/admin", admin_app) # This line is no longer needed
 
 @app.get("/")
 def root():

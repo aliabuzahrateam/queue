@@ -18,6 +18,7 @@ email-validator
 python-jose[cryptography]
 PyJWT
 python-slugify
+sqladmin
 
 # HTTP
 httpx
