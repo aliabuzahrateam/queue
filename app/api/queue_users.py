@@ -37,7 +37,7 @@ def join_queue(
             visitor_id=queue_user_in.visitor_id,
             status=QueueUserStatus.ready,
             token=fake_token,
-            redirect_url=None,
+            redirect_url=app.callback_url,
             wait_time=0,
             expires_at=datetime.utcnow() + timedelta(minutes=5),
             created_at=datetime.utcnow()
